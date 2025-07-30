@@ -29,8 +29,7 @@ async function handleEvent(event) {
   return Promise.resolve(null);
 }
 
-// Load service account key
-const serviceAccount = require('./yakultdata-e17363f4c9dd.json'); // Service account key
+
 // Initialize Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount), // Use the same serviceAccount you have
