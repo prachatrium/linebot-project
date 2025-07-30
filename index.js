@@ -10,15 +10,8 @@ const { createCanvas, loadImage } = require('canvas');
 const vision = require('@google-cloud/vision');
 const line = require('@line/bot-sdk');
 const admin = require('firebase-admin');
-
-// LINE credentials from .env
-const client = new line.Client({
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-});
-
-const middleware = line.middleware({
-  channelSecret: process.env.CHANNEL_SECRET,
-});
+const base64 = process.env.GOOGLE_CREDENTIALS_BASE64;
+const serviceAccount = JSON.parse(Buffer.from(base64, 'base64').toString('utf8'));
 
 // LINE Webhook Endpoint
 app.post('/webhook', middleware, (req, res) => {
