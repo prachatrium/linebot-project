@@ -727,10 +727,6 @@ async function handleImage(event) {
   }
 }
 
-
-// Express app for webhook handling
-const app = express();
-
 app.post(
   '/webhook',
   line.middleware({ channelSecret: process.env.CHANNEL_SECRET }),
