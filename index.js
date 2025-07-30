@@ -17,6 +17,7 @@ const config = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
   channelSecret: process.env.CHANNEL_SECRET
 };
+const middleware = line.middleware(config);
 // LINE Webhook Endpoint
 app.post('/webhook', middleware, (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
