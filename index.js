@@ -13,6 +13,10 @@ const admin = require('firebase-admin');
 const base64 = process.env.GOOGLE_CREDENTIALS_BASE64;
 const serviceAccount = JSON.parse(Buffer.from(base64, 'base64').toString('utf8'));
 
+const config = {
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+  channelSecret: process.env.CHANNEL_SECRET
+};
 // LINE Webhook Endpoint
 app.post('/webhook', middleware, (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
