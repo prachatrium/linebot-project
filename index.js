@@ -46,7 +46,7 @@ const bucket = admin.storage().bucket();
 
 // Initialize a Google Vision client
 const visionclient = new vision.ImageAnnotatorClient({
-  keyFilename: './yakultdata-e17363f4c9dd.json', // Replace with your service account file path
+  credentials: serviceAccount
 });
 
 const client = new line.Client({
