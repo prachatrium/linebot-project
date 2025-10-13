@@ -186,8 +186,8 @@ async function handleTextEvent(event) {
       else if (groupId === orderGroupId) {
         const messageText = event.message.text.trim();
 
-        if (messageText.includes('รายการใหม่:')) {
-          console.log('รายการใหม่: message received in target group.');
+        if (messageText.includes('รายงานผลการส่งสินค้า:')) {
+          console.log('รายงานผลการส่งสินค้า: message received in target group.');
           await handleOrderMessage(event);
         } else {
           console.log('Message in order group does not match order message format.');
