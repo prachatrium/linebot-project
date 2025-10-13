@@ -186,7 +186,7 @@ async function handleTextEvent(event) {
       else if (groupId === orderGroupId) {
         const messageText = event.message.text.trim();
 
-        if (messageText.includes('รายงานผลการส่งสินค้า:')) {
+        if (messageText.includes('รายงานผลการส่งสินค้า')) {
           console.log('รายงานผลการส่งสินค้า: message received in target group.');
           await handleOrderMessage(event);
         } else {
