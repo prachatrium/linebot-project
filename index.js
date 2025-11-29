@@ -736,14 +736,22 @@ app.post(
   '/webhook',
   line.middleware({ channelSecret: process.env.CHANNEL_SECRET }),
   (req, res) => {
+
+    res.status(200).send('OK');  // <-- ตอบก่อน
+
     Promise.all(req.body.events.map(handleEvent))
-      .then((result) => res.json(result))
+      .then((result) => {
+        console.log('Events processed:', result);
+      })
       .catch((err) => {
-        console.error(err);
-        res.status(500).end();
+        console.error('Error processing events:', err);
       });
   }
 );
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server is running on port ${process.env.PORT || 3001}`);
