@@ -605,7 +605,7 @@ async function detectQRCode(imagePath) {
 }
 
 let requestCount = 0;
-const MAX_REQUESTS_PER_MONTH = 1000; // Free tier limit
+const MAX_REQUESTS_PER_MONTH = 1800; // Free tier limit
 
 const { Storage } = require('@google-cloud/storage');
 
@@ -672,8 +672,8 @@ async function handleImage(event) {
       console.log(`Vision API called. Current count: ${requestCount}`);
 
       if (requestCount >= MAX_REQUESTS_PER_MONTH) {
-        console.log('Vision API request limit reached. Skipping OCR.');
-        matchResult = 'A'; // Default action when limit is reached
+        console.warn('OCR quota reached. Skip image (fail closed).');
+        return; // ไม่ส่งรูปใดๆ
       } else {
         // Step 2: Perform OCR using Google Vision API
         const [result] = await visionclient.textDetection(imageBuffer);
