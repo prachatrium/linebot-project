@@ -18,22 +18,6 @@ const config = {
   channelSecret: process.env.CHANNEL_SECRET
 };
 const middleware = line.middleware(config);
-// LINE Webhook Endpoint
-app.post('/webhook', middleware, (req, res) => {
-  Promise.all(req.body.events.map(handleEvent))
-    .then((result) => res.json(result))
-    .catch((err) => {
-      console.error(err);
-      res.status(500).end();
-    });
-});
-
-// REPLACE this with actual event handler function
-async function handleEvent(event) {
-  console.log("Event received", event.type);
-  return Promise.resolve(null);
-}
-
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
@@ -243,8 +227,6 @@ function expandShorthandCommands(message) {
   return commands;
 }
 
-
-
 async function processInventoryMessage(message) {
   try {
     // Parse the message
@@ -320,9 +302,6 @@ async function updateSalesSheet(sheets, data) {
   // Fetch the individual sales sheet
   const salesSheetName = salesId;
   const salesRange = `'${salesSheetName}'!A:F`;
-  // List of supervisor/admin IDs
-const supervisorIds = ['เก่ง', 'อ๋อย', 'หน่อย', 'เปิ้ล', 'กุ้ง', 'อร', 'บุ๋ม', 'AG'];
-
 
   // Check if the sheet exists
   let sheetExists = false;
